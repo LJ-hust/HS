@@ -58,7 +58,10 @@ class RedirectMiddleware(object):
         return req
 
     def PUT(self,req):
-        content_length = req.headers['Content-Length']
+        try：
+            content_length = req.headers['Content-Length']
+        except:
+            content_length = 0
         metaTree = AVLTree().load_tree()
         key = int(md5(''+req.environ['PATH_INFO']+'').hexdigest(),16)
         capacity = int(content_length)
